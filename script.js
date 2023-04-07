@@ -26,6 +26,7 @@ function getPlayerChoice(){
     }
 
     console.log("You choose: " + choice);
+    return choice;
 }
 
 function validateInput(playerInput){
@@ -46,11 +47,10 @@ function validateInput(playerInput){
     }
 }
 
-function rockPaperScissors(playerChoice, computerChoice){
+function rockPaperScissorsRound(playerChoice, computerChoice){
     let victory;
-    
     if(playerChoice == computerChoice){
-        return "Its a tie! You both choose " + playerChoice;
+         return -1;
     }else if(computerChoice == "rock"){
         if(playerChoice == "paper"){
             victory = true;
@@ -74,12 +74,30 @@ function rockPaperScissors(playerChoice, computerChoice){
         }
     }
 
-    if(victory){
-        return "You win! " + playerChoice + " beats " + computerChoice;
-    }else{
-        return "You lose! " + computerChoice + " beats " + playerChoice;
+    return victory;
+}
+
+function game() {
+    let playerVictories = 0;
+    let pcVictories = 0;
+
+    for (let index = 0; index < 5; index++) {
+        let playerChoice = getPlayerChoice();
+        let computerChoice = getComputerChoice();
+        let victory = rockPaperScissorsRound(playerChoice, computerChoice);
+        
+        if(victory == 1){
+            playerVictories++;
+            console.log("You win! " + playerChoice + " beats " + computerChoice);
+        }else if(victory == 0){
+            pcVictories++;
+            console.log("You lose! " + computerChoice + " beats " + playerChoice);
+        }else{
+            console.log("Its a tie! You both choose " + playerChoice);
+        }
     }
+    console.log("The overall winner is " + (playerVictories > pcVictories ? ("you with " + playerVictories + " victories!") : ("the computer with " + pcVictories + " victories!")));
     
 }
 
-console.log(rockPaperScissors(getPlayerChoice(), getComputerChoice()));
+game();
