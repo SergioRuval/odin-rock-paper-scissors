@@ -1,6 +1,7 @@
 const buttons = document.querySelectorAll("#playerControlls>button");
 const playerScore = document.querySelector("#playerScore>p");
 const pcScore = document.querySelector("#pcScore>p");
+const message = document.querySelector("#announcements>h1");
 
 let playerVictories = 0;
 let pcVictories = 0;
@@ -99,15 +100,26 @@ function playRound(e){
     if(victory == 1){
         playerVictories++;
         console.log("You win! " + playerChoice + " beats " + computerChoice);
+        message.textContent = "You win! " + playerChoice + " beats " + computerChoice;
     }else if(victory == 0){
         pcVictories++;
         console.log("You lose! " + computerChoice + " beats " + playerChoice);
+        message.textContent = "You lose! " + computerChoice + " beats " + playerChoice;
     }else{
         console.log("Its a tie! You both choose " + playerChoice);
+        message.textContent = "Its a tie! You both choose " + playerChoice;
     }
     
     playerScore.textContent = playerVictories;
     pcScore.textContent = pcVictories;
+
+    checkOverallWin();
+}
+
+function checkOverallWin() {
+    if(playerVictories == 5 || pcVictories == 5){
+        message.textContent = "The overall winner is " + (playerVictories > pcVictories ? ("you with " + playerVictories + " victories!") : ("the computer with " + pcVictories + " victories!"));
+    }
 }
 
 function game(e) {
