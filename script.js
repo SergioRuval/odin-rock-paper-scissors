@@ -1,3 +1,17 @@
+const buttons = document.querySelectorAll("#playerControlls>button");
+const playerScore = document.querySelector("#playerScore>p");
+const pcScore = document.querySelector("#pcScore>p");
+
+let playerVictories = 0;
+let pcVictories = 0;
+
+buttons.forEach(btn => {
+    btn.addEventListener('click', playRound);
+});
+
+playerScore.textContent = playerVictories;
+pcScore.textContent = pcVictories;
+
 function getComputerChoice(){
     let choice;
     let number = Math.floor(Math.random() * 3);
@@ -18,11 +32,12 @@ function getComputerChoice(){
     return choice;
 }
 
-function getPlayerChoice(){
-    let choice = prompt("What is your choice?");
+function getPlayerChoice(playerChoice){
+    let choice = playerChoice.toLowerCase();
 
-    while(!validateInput(choice)){
-        choice = prompt("Invalid input, please try again");
+    if(!validateInput(choice)){
+        alert("Invalid input, please try again");
+        return "";
     }
 
     console.log("You choose: " + choice);
@@ -77,15 +92,33 @@ function rockPaperScissorsRound(playerChoice, computerChoice){
     return victory;
 }
 
-function game() {
+function playRound(e){
+    let playerChoice = getPlayerChoice(e.target.textContent);
+    let computerChoice = getComputerChoice();
+    let victory = rockPaperScissorsRound(playerChoice, computerChoice);
+    if(victory == 1){
+        playerVictories++;
+        console.log("You win! " + playerChoice + " beats " + computerChoice);
+    }else if(victory == 0){
+        pcVictories++;
+        console.log("You lose! " + computerChoice + " beats " + playerChoice);
+    }else{
+        console.log("Its a tie! You both choose " + playerChoice);
+    }
+    
+    playerScore.textContent = playerVictories;
+    pcScore.textContent = pcVictories;
+}
+
+function game(e) {
     let playerVictories = 0;
     let pcVictories = 0;
 
-    for (let index = 0; index < 5; index++) {
-        let playerChoice = getPlayerChoice();
+    //for (let index = 0; index < 5; index++) {
+        let playerChoice = getPlayerChoice(e.target.textContent);
         let computerChoice = getComputerChoice();
         let victory = rockPaperScissorsRound(playerChoice, computerChoice);
-        
+        console.log(victory);
         if(victory == 1){
             playerVictories++;
             console.log("You win! " + playerChoice + " beats " + computerChoice);
@@ -95,9 +128,9 @@ function game() {
         }else{
             console.log("Its a tie! You both choose " + playerChoice);
         }
-    }
+    //}
     console.log("The overall winner is " + (playerVictories > pcVictories ? ("you with " + playerVictories + " victories!") : ("the computer with " + pcVictories + " victories!")));
     
 }
 
-game();
+//game();
