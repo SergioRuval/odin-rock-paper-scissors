@@ -1,0 +1,74 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(211, 211, 211);
+}
+
+body {
+    background-color: rgb(49, 49, 49);
+    padding: 0px 50px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#announcements {
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 25px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#scores {
+    display: flex;
+    justify-content: space-around;
+    padding: 25px;
+}
+
+#scores>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+#scores>div>p {
+    font-size: 2rem;
+}
+
+#field {
+    display: flex;
+    flex: 1;
+}
+
+#playerField, #pcField {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#playerControlls, #pcControlls {
+    flex: 1;
+    padding: 25px;
+}
+
+#playerControlls>button {
+    padding: 12.5px;
+    font-size: 1.25rem;
+    border-radius: 12.5px;
+    border: none;
+    background-color: black;
+}
+
+#pcSelection, #playerSelection {
+    display: flex;
+    flex: 3;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}

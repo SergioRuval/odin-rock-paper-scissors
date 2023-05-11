@@ -30,6 +30,8 @@ function getComputerChoice(){
     }
 
     console.log("Computer's choice: " + choice);
+    const selectionPrinter = document.querySelector("#pcSelection>p");
+    selectionPrinter.textContent = choice.toUpperCase();
     return choice;
 }
 
@@ -41,6 +43,8 @@ function getPlayerChoice(playerChoice){
         return "";
     }
 
+    const selectionPrinter = document.querySelector("#playerSelection>p");
+    selectionPrinter.textContent = choice.toUpperCase();
     console.log("You choose: " + choice);
     return choice;
 }
